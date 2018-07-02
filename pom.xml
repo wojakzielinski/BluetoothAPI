@@ -26,8 +26,16 @@
         <dependency>
             <groupId>net.sf.bluecove</groupId>
             <artifactId>bluecove</artifactId>
-            <version>2.1.1-SNAPSHOT</version>
+            <version>2.1.0</version>
         </dependency>
+
+        <!-- LINUX-->
+        <dependency>
+            <groupId>net.sf.bluecove</groupId>
+            <artifactId>bluecove-gpl</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/org.knowm.xchart/xchart -->
         <dependency>
@@ -42,6 +50,50 @@
             <artifactId>jsoup</artifactId>
             <version>1.7.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>8.4-702.jdbc3</version>
+        </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>(whatever version is current)</version>
+                <configuration>
+                    <!-- or whatever version you use -->
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>bluetooth.RemoteDeviceDiscovery</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
